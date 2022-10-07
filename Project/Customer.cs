@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM.Exceptions;
 
 namespace ATM.Project
 {
@@ -38,6 +39,28 @@ namespace ATM.Project
         {
             personalAccounts.Add(new PersonalAccount(accNum, name, surname, pin));
         }
-
+        public PersonalAccount GetAccount(string accNum)
+        {
+            foreach(PersonalAccount ac in personalAccounts)
+            {
+                if(ac.AccNum == accNum) { return ac; }
+            }
+            throw new AccountNotFoundException(accNum);
+        }
+        public void CloseAccount(string accNum)
+        {
+            if(GetAccount(accNum).Balance > 0)
+            {
+                throw new BalanceRemainingException(GetAccount(accNum).Balance);
+            }
+            else
+            {
+                personalAccounts.Remove(GetAccount(accNum));
+            }
+        }
+        public override string ToString()
+        {
+            return name + " " + surname.ToUpper() + " has " + personalAccounts.Count() + " accounts";
+        }
     }
 }
