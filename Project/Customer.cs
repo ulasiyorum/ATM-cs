@@ -15,6 +15,11 @@ namespace ATM.Project
         private List<PersonalAccount> personalAccounts = new();
         private static List<Customer> customers = new();
 
+        public string Name { get => name; }
+        public string Surname { get => surname; }
+        public int Id { get => id; }
+        public List<PersonalAccount> PersonalAccounts { get=> personalAccounts; }
+
         internal Customer(int id,string name,string surname)
         {
             Random random = new Random();
@@ -28,7 +33,7 @@ namespace ATM.Project
                 this.name = name;
                 this.surname = surname;
             } while (this.id == 0);
-            
+            customers.Add(this);
         }
 
         internal void OpenAccount(string accNum)

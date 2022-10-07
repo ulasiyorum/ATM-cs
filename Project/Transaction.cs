@@ -16,7 +16,8 @@ namespace ATM.Project
 
         public int Type { get => type; }
         public double Amount { get => amount; }
-
+        public string From { get => from; }
+        public string To { get => to; }
         public Transaction(int type, string from, string to, double amount)
         {
             if ((type != 1 && type != 2 && type != 3) || amount < 0) { throw new InvalidParameterException("Invalid transaction."); }
@@ -40,6 +41,21 @@ namespace ATM.Project
             }
         }
 
+        public override string ToString()
+        {
+            if(type == 1)
+            {
+                return "Deposit \nAccount Number:" + to + "\nAmount:" + amount;
+            }
+            else if(type == 2)
+            {
+                return "Transaction \nAccount Number From:" + from + "\nTo:" + to + "\nAmount:" + amount;
+            }
+            else
+            {
+                return "Withdraw \nAccount Number:" + from + "\n Amount:" + amount; 
+            }
+        }
 
         public class TransactionComparator : Comparer<Transaction>
         {

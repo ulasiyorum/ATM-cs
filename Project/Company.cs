@@ -15,6 +15,11 @@ namespace ATM.Project
         private List<BusinessAccount> businessAccounts = new();
         private static List<Company> companies = new();
 
+
+        public string CompanyName { get => companyName; }
+        public int Id { get => id; }
+        public List<BusinessAccount> BusinessAccounts { get => businessAccounts; }
+
         internal Company(string companyName, int id)
         {
             this.companyName = companyName;
@@ -27,6 +32,7 @@ namespace ATM.Project
                     if (c.id == this.id) { this.id = 0; }
                 }
             } while (id == 0);
+            companies.Add(this);
         }
 
         public void OpenAccount(string accNum)
